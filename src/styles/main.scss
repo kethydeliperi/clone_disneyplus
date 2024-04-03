@@ -1,5 +1,10 @@
 @use 'variaveis';
 @use 'hero';
+@use 'shows';
+@use 'plans';
+@use 'avaliable-devices';
+@use 'faq';
+@use 'footer';
 @use 'header';
 
 @font-face {
@@ -25,93 +30,103 @@ body {
     background-color: variaveis.$corDeFundo;
 }
 
-@mixin texto($fontSize: 20px) {
+@mixin text($fontSize: 16px) {
     font-size: $fontSize;
     line-height: $fontSize + 10px;
     color: variaveis.$corTextoPrincipal;
 }
 
-@mixin titulo($fontSize: 40px) {
-    @include texto($fontSize);
+@mixin title($fontSize: 40px) {
+    @include text($fontSize);
     color: variaveis.$corTextoSecundario;
 }
 
-.texto--grande {
-    @include texto(24px);
+.text--big {
+    @include text(18px);
 
     @media (max-width: 768px) {
-        @include texto(15px);
+        @include text(15px);
     }
 }
 
-.texto {
-    @include texto;
+.text {
+    @include text;
 
     @media (max-width: 768px) {
-        @include texto(14px);
+        @include text(14px);
     }
 }
 
-.texto--pequeno {
-    @include texto(18px);
+.text--small {
+    @include text(12px);
 
     @media (max-width: 768px) {
-        @include texto(14px);
+        @include text(11px);
     }
 }
 
-.link-texto {
-    @include texto(18px);
+.link-text {
+    @include text(18px);
     color: variaveis.$corTextoSecundario;
     text-decoration: underline;
 }
 
-.titulo--grande {
-    @include titulo(44px);
+.title--big {
+    @include title(44px);
 
     @media (max-width: 768px) {
-        @include titulo(26px);
+        @include title(26px);
     }
 }
 
-.titulo {
-    @include titulo;
+.title {
+    @include title;
 
     @media (max-width: 768px) {
-        @include titulo(24px);
+        @include title(24px);
     }
 }
 
-.titulo--pequeno {
-    @include titulo(28px);
+.title--small {
+    @include title(28px);
 
     @media (max-width: 768px) {
-        @include titulo(22px);
+        @include title(22px);
     }
 }
 
 .button {
-    position: fixed;
-    top: 0;
-    right: 0;
-    margin: 16px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
-    width: auto;
+    justify-content: center;
+    width: 100%;
     height: 60px;
     font-size: 18px;
     color: variaveis.$corTextoSecundario;
+    background-color: variaveis.$corDeFundoBotaoPrimario;
     text-transform: uppercase;
     border-radius: 6px;
     text-decoration: none;
     cursor: pointer;
     padding: 8px 14px;
     letter-spacing: 1px;
+    border: 1px solid variaveis.$corDeFundoBotaoPrimario;
 
-    &--assista {
-       background-color: rgba(variaveis.$corDeFundoBotaoAssista, 0.8);
+    &:hover {
+        background-color: lighten(variaveis.$corDeFundoBotaoPrimario, 3%);
+    }
+
+    &--secundary {
+        background-color: variaveis.$corDeFundoBotaoSecundario;
+        border-color: variaveis.$corDeFundoBotaoSecundario;
+
+        &:hover {
+            background-color: lighten(variaveis.$corDeFundoBotaoSecundario, 3%);
+        }
+    }
+
+    &--enter {
+       background-color: rgba(variaveis.$corDeFundoBotaoEntrar, 0.8);
        border-color: variaveis.$corTextoSecundario;
 
        &:hover {
@@ -119,4 +134,54 @@ body {
         color: variaveis.$corDeFundo;
        }
     }
+}
+
+.image-text-section {
+    padding: 5.6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    &__text_container {
+        padding: 0 2vw;
+        
+        h2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    &--image-full-width {
+        display: block;
+        position: relative;
+
+        img {
+            width: 100%;
+        }
+
+        &__text_container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: calc(50% - 5.6vw);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            @media (max-width: 768px) {
+                position: relative;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+    
 }
